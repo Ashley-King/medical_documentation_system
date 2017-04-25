@@ -1,5 +1,7 @@
 package edu.tridenttech.king.finalProject.model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ProgressNote implements Note
@@ -9,11 +11,12 @@ public class ProgressNote implements Note
     private int procedure;
     private String note;
     @Override
-    public Date getDateTime()
+    public String getDateTime()
     {
-        //"EEE, d MMM yyyy HH:mm:ss Z"
-        // TODO Auto-generated method stub
-        return null;
+        DateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
+        Date date = new Date();
+        System.out.println(dateFormat.format(date)); 
+        return dateFormat.format(date);
     }
 
     @Override
@@ -46,6 +49,13 @@ public class ProgressNote implements Note
 
     @Override
     public void getNote()
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void getPatient()
     {
         // TODO Auto-generated method stub
         

@@ -6,12 +6,14 @@ public class Patient
     private String name;
     private String dob;
     private PatientType type;
+    private String id;
     
-    public  Patient(String name, String dob, PatientType type) 
+    public  Patient(String name, String dob, String id, PatientType type) 
     {
         this.name = name;
         this.dob = dob;
         this.type = type;
+        this.id = id;
     }//end Patient()
         
     public String getName()
@@ -32,4 +34,13 @@ public class Patient
     {
         return this.type;
     }//end getPatientType()
+    public String getPatientId()
+    {
+        return this.id;
+    }//end getPatientId()
+    
+    public void setPatientId(String id)
+    {
+        this.id = id;
+    }//end setPatientId()
 }//end class Patient

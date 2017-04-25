@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 import edu.tridenttech.king.finalProject.model.Patient.PatientType;
@@ -37,8 +38,9 @@ public class Clinic
             String[] fields = line.split(",");
             String patientName = fields[0];
             String dob = fields[1];
+            String patientId = fields[2];
             PatientType type = null;
-            switch (fields[2].charAt(0))
+            switch (fields[3].charAt(0))
             {
                 case 'E':
                 case 'e':
@@ -58,18 +60,18 @@ public class Clinic
                 }        
             }//end switch
             
-            String tName = fields[3];
-            String mDate = fields[4];
-            createNewPatient(patientName, dob, type, tName, mDate);
+            String tName = fields[4];
+            String mDate = fields[5];
+            createNewPatient(patientName, dob, patientId, type, tName, mDate);
         }//end while()
     }//end loadPatients
     
-    public boolean createNewPatient(String patientName, String dob, PatientType type, 
+    public boolean createNewPatient(String patientName, String dob, String id, PatientType type, 
             String teacherName, String meetingDate)
     {
         if(type == Patient.PatientType.EarlyIntervention)
         {
-            EIPatient newPatient = new EIPatient(patientName, dob, teacherName,
+            EIPatient newPatient = new EIPatient(patientName, dob, id, teacherName,
                     meetingDate);
             try
             {
@@ -83,7 +85,7 @@ public class Clinic
         }
         else
         {
-            SchoolAgePatient newPatient = new SchoolAgePatient(patientName, dob,
+            SchoolAgePatient newPatient = new SchoolAgePatient(patientName, dob, id,
                     teacherName, meetingDate);
             try
             {
@@ -99,7 +101,7 @@ public class Clinic
     }//end createNewPatient
     public void createPatientFile(Patient newPatient) throws IOException
     {
-        String fileName = newPatient.getName() + " - " + newPatient.getDateOfBirth();
+        String fileName = newPatient.getName() + " - " + newPatient.getPatientId();
         File newFile = new File(FILEPATH + fileName);
         if(!newFile.exists())
         {
@@ -116,6 +118,15 @@ public class Clinic
                     " DOB: " + patients.get(i).getDateOfBirth() + "\n");
         }
     }//end printPatientList()
+    public Patient findPatientById(String id)
+    {
+        Patient patient = null;
+        Optional<Patient> match = patients.stream().filter(e -> e.getPatientId().equals(id)).findFirst();
+        if (match.isPresent()) {
+            patient = match.get();
+        }
+        return patient;
+    }//end findPatientById()
 
 
 }//end class Clinic

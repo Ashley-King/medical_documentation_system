@@ -5,10 +5,10 @@ public class EIPatient extends Patient
     private String eiName;
     private String IFSPDate;
     
-    public EIPatient(String name, String dob, String eiName,
+    public EIPatient(String name, String dob, String id, String eiName,
             String date)
     {
-        super(name, dob, Patient.PatientType.EarlyIntervention);
+        super(name, dob, id, Patient.PatientType.EarlyIntervention);
         this.eiName = eiName;
         this.IFSPDate = date;
         
