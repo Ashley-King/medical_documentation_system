@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import edu.tridenttech.king.finalProject.model.Clinic;
+import edu.tridenttech.king.finalProject.model.DailyNote;
 import edu.tridenttech.king.finalProject.model.Patient;
 import edu.tridenttech.king.finalProject.model.ProgressNote;
 import javafx.application.Application;
@@ -27,10 +28,23 @@ public class MainApplication
       String goal = input.next();
       System.out.println("Enter your current therapy recommendations: \n");
       String recommendation = input.next();
-      
-      input.close();
+      //input.close();
       ProgressNote newPN = new ProgressNote(id, units, procedure, goal, recommendation);
       newPN.writeNoteToFile();
+      
+      System.out.println("Enter 6-digit patient ID number: \n");
+      String id2 = input.next();
+      System.out.println("Enter procedure code for this visit: \n");
+      int procedure2 = input.nextInt();
+      
+      System.out.println("Enter number of units for this visit: \n");
+      int units2 = input.nextInt();
+      System.out.println("Enter Daily Note: \n");
+      String daily = input.next();
+      
+      input.close();
+      DailyNote newDaily = new DailyNote(id2, units2, procedure2, daily);
+      newDaily.writeNoteToFile();
         //Application.launch(args);
 
     }//end main()

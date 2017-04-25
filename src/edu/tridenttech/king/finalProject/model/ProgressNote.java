@@ -71,6 +71,7 @@ public class ProgressNote implements Note
             bw.write("*** THERAPY RECOMMENDATION ***\n");
             bw.write(this.recommendation + "\n\n");
             bw.write("*** END OF PROGRESS NOTE ***\n\n"); 
+            bw.write("********************\n\n");
         } 
         catch (IOException e)
         {
