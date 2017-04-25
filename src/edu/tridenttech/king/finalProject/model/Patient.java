@@ -12,7 +12,13 @@ public class Patient
         this.name = name;
         this.dob = dob;
         this.type = type;
+        createPatientFile();
     }//end Patient()
+    
+    private void createPatientFile()
+    {
+        
+    }
     
     public String getName()
     {
