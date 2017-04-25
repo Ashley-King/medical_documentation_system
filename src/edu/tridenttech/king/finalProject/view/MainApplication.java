@@ -5,7 +5,7 @@ import edu.tridenttech.king.finalProject.model.Clinic;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class MainApplication extends Application
+public class MainApplication 
 {
     public static void main(String[] args) throws FileNotFoundException
     {
@@ -17,10 +17,10 @@ public class MainApplication extends Application
 
     }//end main()
 
-    @Override
-    public void start(Stage primaryStage) throws Exception
-    {
-        // TODO Auto-generated method stub
-        
-    }//end start()
+//    @Override
+//    public void start(Stage primaryStage) throws Exception
+//    {
+//        // TODO Auto-generated method stub
+//        
+//    }//end start()
 }//end class MainApplication

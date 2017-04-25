@@ -2,6 +2,7 @@ package edu.tridenttech.king.finalProject.model;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,6 +17,7 @@ public class Clinic
     private static Clinic instance = new Clinic();
 
     private ArrayList<Patient> patients = new ArrayList<>();
+    private static final String FILEPATH = "/Users/ashleyking/Documents/eclipse_workspace/Final_Project_King/Files/";
     
     
     public static Clinic getInstance()
@@ -69,17 +71,41 @@ public class Clinic
         {
             EIPatient newPatient = new EIPatient(patientName, dob, teacherName,
                     meetingDate);
+            try
+            {
+                createPatientFile(newPatient);
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+           
             return patients.add(newPatient);
         }
         else
         {
             SchoolAgePatient newPatient = new SchoolAgePatient(patientName, dob,
                     teacherName, meetingDate);
+            try
+            {
+                createPatientFile(newPatient);
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+            }
             return patients.add(newPatient);          
         }
         
         
     }//end createNewPatient
+    public void createPatientFile(Patient newPatient) throws IOException
+    {
+        String fileName = newPatient.getName() + " - " + newPatient.getDateOfBirth();
+        File newFile = new File(FILEPATH + fileName);
+        if(!newFile.exists())
+        {
+            newFile.createNewFile();
+        }
+    }
     
     public void printPatientList()
     {

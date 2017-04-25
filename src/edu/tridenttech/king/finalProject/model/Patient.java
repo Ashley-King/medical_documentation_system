@@ -7,19 +7,13 @@ public class Patient
     private String dob;
     private PatientType type;
     
-    public  Patient(String name, String dob, PatientType type)
+    public  Patient(String name, String dob, PatientType type) 
     {
         this.name = name;
         this.dob = dob;
         this.type = type;
-        createPatientFile();
     }//end Patient()
-    
-    private void createPatientFile()
-    {
         
-    }
-    
     public String getName()
     {
         return this.name;
