@@ -18,7 +18,7 @@ public class Clinic
     private static Clinic instance = new Clinic();
 
     private ArrayList<Patient> patients = new ArrayList<>();
-    private static final String FILEPATH = "/Users/ashleyking/Documents/eclipse_workspace/Final_Project_King/Files/";
+    public static final String FILEPATH = "/Users/ashleyking/Documents/eclipse_workspace/Final_Project_King/Files/";
     
     
     public static Clinic getInstance()
@@ -101,7 +101,7 @@ public class Clinic
     }//end createNewPatient
     public void createPatientFile(Patient newPatient) throws IOException
     {
-        String fileName = newPatient.getName() + " - " + newPatient.getPatientId();
+        String fileName = newPatient.getPatientId();
         File newFile = new File(FILEPATH + fileName);
         if(!newFile.exists())
         {
