@@ -15,10 +15,10 @@ public class DailyNote implements Note
     private int procedure;
     private String dailyNote;
     private Patient patient;
-    private String id;
+    private int id;
     
     Clinic clinic = Clinic.getInstance();
-    public DailyNote(String id, int units, int proc, String daily)
+    public DailyNote(int id, int units, int proc, String daily)
     {
         this.id = id;
         this.units = units;
@@ -47,7 +47,7 @@ public class DailyNote implements Note
     {
         BufferedWriter bw = null;
         FileWriter fw = null;
-        String fileName = this.id;
+        int fileName = this.id;
         File file = new File(clinic.FILEPATH + fileName);
         try
         {

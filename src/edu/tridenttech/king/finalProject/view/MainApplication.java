@@ -18,7 +18,7 @@ public class MainApplication
         theClinic.loadPatients("PatientList.csv");
       Scanner input = new Scanner(System.in).useDelimiter("\\n");;
       System.out.println("Enter 6-digit patient ID number: \n");
-      String id = input.next();
+      int id = input.nextInt();
       System.out.println("Enter procedure code for this visit: \n");
       int procedure = input.nextInt();
       
@@ -33,7 +33,7 @@ public class MainApplication
       newPN.writeNoteToFile();
       
       System.out.println("Enter 6-digit patient ID number: \n");
-      String id2 = input.next();
+      int id2 = input.nextInt();
       System.out.println("Enter procedure code for this visit: \n");
       int procedure2 = input.nextInt();
       

@@ -5,7 +5,7 @@ public class EIPatient extends Patient
     private String eiName;
     private String IFSPDate;
     
-    public EIPatient(String name, String dob, String id, String eiName,
+    public EIPatient(String name, String dob, int id, String eiName,
             String date)
     {
         super(name, dob, id, Patient.PatientType.EarlyIntervention);

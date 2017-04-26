@@ -5,7 +5,7 @@ public class SchoolAgePatient extends Patient
     private String teacherName;
     private String IEPDate;
     
-    public SchoolAgePatient(String name, String dob, String id, String teacherName,
+    public SchoolAgePatient(String name, String dob, int id, String teacherName,
             String date)
     {
         super(name, dob, id, Patient.PatientType.SchoolAge);

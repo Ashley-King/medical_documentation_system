@@ -1,14 +1,18 @@
 package edu.tridenttech.king.finalProject.model;
 
-public class Patient
+import java.util.Comparator;
+
+
+
+public class Patient implements Comparator<Patient>
 {
     static public enum PatientType { EarlyIntervention, SchoolAge };
     private String name;
     private String dob;
     private PatientType type;
-    private String id;
+    private int id;
     
-    public  Patient(String name, String dob, String id, PatientType type) 
+    public  Patient(String name, String dob, int id, PatientType type) 
     {
         this.name = name;
         this.dob = dob;
@@ -34,13 +38,22 @@ public class Patient
     {
         return this.type;
     }//end getPatientType()
-    public String getPatientId()
+    public int getPatientId()
     {
         return this.id;
     }//end getPatientId()
     
-    public void setPatientId(String id)
+    public void setPatientId(int id)
     {
         this.id = id;
     }//end setPatientId()
+
+    @Override
+    public int compare(Patient patient1, Patient patient2)
+    {
+        return Integer.compare(patient1.getPatientId(), patient2.getPatientId());
+    }
+
+    
+    
 }//end class Patient

@@ -13,7 +13,7 @@ import edu.tridenttech.king.finalProject.model.Patient.PatientType;
 
 
 
-public class Clinic
+public class Clinic 
 {
     private static Clinic instance = new Clinic();
 
@@ -39,6 +39,7 @@ public class Clinic
             String patientName = fields[0];
             String dob = fields[1];
             String patientId = fields[2];
+            int numPatientId = Integer.parseInt(patientId);
             PatientType type = null;
             switch (fields[3].charAt(0))
             {
@@ -62,11 +63,11 @@ public class Clinic
             
             String tName = fields[4];
             String mDate = fields[5];
-            createNewPatient(patientName, dob, patientId, type, tName, mDate);
+            createNewPatient(patientName, dob, numPatientId, type, tName, mDate);
         }//end while()
     }//end loadPatients
     
-    public boolean createNewPatient(String patientName, String dob, String id, PatientType type, 
+    public boolean createNewPatient(String patientName, String dob, int id, PatientType type, 
             String teacherName, String meetingDate)
     {
         if(type == Patient.PatientType.EarlyIntervention)
@@ -101,7 +102,7 @@ public class Clinic
     }//end createNewPatient
     public void createPatientFile(Patient newPatient) throws IOException
     {
-        String fileName = newPatient.getPatientId();
+        int fileName = newPatient.getPatientId();
         File newFile = new File(FILEPATH + fileName);
         if(!newFile.exists())
         {
@@ -118,15 +119,17 @@ public class Clinic
                     " DOB: " + patients.get(i).getDateOfBirth() + "\n");
         }
     }//end printPatientList()
-    public Patient findPatientById(String id)
+    public Patient findPatientById(int id)
     {
         Patient patient = null;
-        Optional<Patient> match = patients.stream().filter(e -> e.getPatientId().equals(id)).findFirst();
+        Optional<Patient> match = patients.stream().filter(e -> e.getPatientId() == id).findFirst();
         if (match.isPresent()) {
             patient = match.get();
         }
         return patient;
     }//end findPatientById()
+    
 
+  
 
 }//end class Clinic

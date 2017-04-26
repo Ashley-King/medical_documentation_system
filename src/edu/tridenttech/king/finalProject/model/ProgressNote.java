@@ -14,12 +14,13 @@ public class ProgressNote implements Note
     private String date;
     private int procedure;
     private String goal;
+    @SuppressWarnings("unused")
     private Patient patient;
-    private String id;
+    private int id;
     private String recommendation;
     
     Clinic clinic = Clinic.getInstance();
-    public ProgressNote(String id, int units, int proc, String goal, String rec)
+    public ProgressNote(int id, int units, int proc, String goal, String rec)
     {
         this.id = id;
         this.units = units;
@@ -48,7 +49,7 @@ public class ProgressNote implements Note
     {
         BufferedWriter bw = null;
         FileWriter fw = null;
-        String fileName = this.id;
+        int fileName = this.id;
         File file = new File(clinic.FILEPATH + fileName);
         try
         {
