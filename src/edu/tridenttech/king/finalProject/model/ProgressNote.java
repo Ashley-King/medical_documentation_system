@@ -1,3 +1,8 @@
+/*
+ * Progress Note enables creation of a new progress note that includes
+ * a new goal for therapy.
+ * @author: Ashley King
+ */
 package edu.tridenttech.king.finalProject.model;
 
 import java.io.BufferedWriter;
@@ -8,18 +13,45 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * The Class ProgressNote.
+ */
 public class ProgressNote implements Note
 {
-    private int units;
-    private String date;
-    private int procedure;
-    private String goal;
-    @SuppressWarnings("unused")
-    private Patient patient;
-    private int id;
-    private String recommendation;
     
+    /** The number of units. */
+    private int units;
+    
+    /** The date. */
+    private String date;
+    
+    /** The procedure code. */
+    private int procedure;
+    
+    /** The goal. */
+    private String goal;
+    
+    /** The patient. */
+    private Patient patient;
+    
+    /** The patient id. */
+    private int id;
+    
+    /** The recommendation. */
+    private String recommendation;
+
+    /** The clinic. */
     Clinic clinic = Clinic.getInstance();
+    
+    /**
+     * Instantiates a new progress note.
+     *
+     * @param id the patient id
+     * @param units the number of units
+     * @param proc the procedure code
+     * @param goal the goal
+     * @param rec the therapy recommendations
+     */
     public ProgressNote(int id, int units, int proc, String goal, String rec)
     {
         this.id = id;
@@ -30,6 +62,10 @@ public class ProgressNote implements Note
         this.date = getDateTime();
         this.patient = getPatient();
     }//end ProgressNote()
+    
+    /* (non-Javadoc)
+     * @see edu.tridenttech.king.finalProject.model.Note#getDateTime()
+     */
     @Override
     public String getDateTime()
     {
@@ -37,6 +73,10 @@ public class ProgressNote implements Note
         Date date = new Date();
         return dateFormat.format(date);
     }//end getDateTime();
+    
+    /* (non-Javadoc)
+     * @see edu.tridenttech.king.finalProject.model.Note#getPatient()
+     */
     @Override
     public Patient getPatient()
     {
@@ -44,13 +84,17 @@ public class ProgressNote implements Note
         return thisPatient;    
     }//end getPatient()
 
+    /* (non-Javadoc)
+     * @see edu.tridenttech.king.finalProject.model.Note#writeNoteToFile()
+     */
     @Override
     public void writeNoteToFile()
     {
         BufferedWriter bw = null;
         FileWriter fw = null;
-        int fileName = this.id;
-        File file = new File(clinic.FILEPATH + fileName);
+        int ptId = this.id;
+        String ptName = this.patient.getName();
+        File file = new File(Clinic.FILEPATH + ptName + " - " + ptId);
         try
         {
             fw = new FileWriter(file.getAbsoluteFile(), true);
@@ -76,7 +120,7 @@ public class ProgressNote implements Note
         } 
         catch (IOException e)
         {
-            
+
             e.printStackTrace();
         }
         finally 
@@ -94,8 +138,8 @@ public class ProgressNote implements Note
                 ex.printStackTrace();
             }
         }
-        
+
     }//end writeToFile()
-    
+
 
 }//end class ProgressNote

@@ -1,3 +1,8 @@
+/*
+ * DailyNote enables the creation of a daily treatment note for each therapy
+ * visit for a patient.
+ * @author: Ashley King
+ */
 package edu.tridenttech.king.finalProject.model;
 
 import java.io.BufferedWriter;
@@ -8,16 +13,42 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DailyNote.
+ */
 public class DailyNote implements Note
 {
-    private int units;
-    private String date;
-    private int procedure;
-    private String dailyNote;
-    private Patient patient;
-    private int id;
     
+    /** The number of units. */
+    private int units;
+    
+    /** The date. */
+    private String date;
+    
+    /** The procedure code. */
+    private int procedure;
+    
+    /** The daily note string. */
+    private String dailyNote;
+    
+    /** The patient. */
+    private Patient patient;
+    
+    /** The patient id. */
+    private int id;
+
+    /** The clinic. */
     Clinic clinic = Clinic.getInstance();
+    
+    /**
+     * Instantiates a new daily note.
+     *
+     * @param id the patient id
+     * @param units the number of units
+     * @param proc the procedure
+     * @param daily the daily note string
+     */
     public DailyNote(int id, int units, int proc, String daily)
     {
         this.id = id;
@@ -27,6 +58,10 @@ public class DailyNote implements Note
         this.date = getDateTime();
         this.patient = getPatient();
     }//end ProgressNote()
+    
+    /* (non-Javadoc)
+     * @see edu.tridenttech.king.finalProject.model.Note#getPatient()
+     */
     @Override
     public Patient getPatient()
     {
@@ -34,6 +69,9 @@ public class DailyNote implements Note
         return thisPatient; 
     }//end getPatient()
 
+    /* (non-Javadoc)
+     * @see edu.tridenttech.king.finalProject.model.Note#getDateTime()
+     */
     @Override
     public String getDateTime()
     {
@@ -42,13 +80,17 @@ public class DailyNote implements Note
         return dateFormat.format(date);
     }//end getDateTime()
 
+    /* (non-Javadoc)
+     * @see edu.tridenttech.king.finalProject.model.Note#writeNoteToFile()
+     */
     @Override
     public void writeNoteToFile()
     {
         BufferedWriter bw = null;
         FileWriter fw = null;
-        int fileName = this.id;
-        File file = new File(clinic.FILEPATH + fileName);
+        int ptId = this.id;
+        String ptName = this.patient.getName();
+        File file = new File(Clinic.FILEPATH + ptName + " - " + ptId);
         try
         {
             fw = new FileWriter(file.getAbsoluteFile(), true);
@@ -72,7 +114,7 @@ public class DailyNote implements Note
         } 
         catch (IOException e)
         {
-            
+
             e.printStackTrace();
         }
         finally 
@@ -90,7 +132,7 @@ public class DailyNote implements Note
                 ex.printStackTrace();
             }
         }
-        
+
     }//end writeNoteToFile()
 
-}
+}//end class DailyNote
