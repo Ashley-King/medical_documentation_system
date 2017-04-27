@@ -54,7 +54,7 @@ public class MainApplication extends Application
     {
         Clinic clinic = Clinic.getInstance();
         Collections.sort(clinic.getAllPatientIdNumbers());
-        new NoteEntryWindow(primaryStage).show(clinic.getAllPatientIdNumbers());
+        new RecordEntryWindow(primaryStage).show(clinic.getAllPatientIdNumbers());
         
     }//end start()
 }//end class MainApplication

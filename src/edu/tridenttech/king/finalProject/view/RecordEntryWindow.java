@@ -22,9 +22,9 @@ import javafx.stage.Stage;
 
 
 /**
- * The Class NoteEntryWindow.
+ * The Class RecordEntryWindow.
  */
-public class NoteEntryWindow 
+public class RecordEntryWindow 
 {
 
     /** The my stage. */
@@ -34,11 +34,11 @@ public class NoteEntryWindow
     protected static ComboBox<Integer> patients = new ComboBox<>();
 
     /**
-     * Instantiates a new note entry window.
+     * Instantiates a new record entry window.
      *
      * @param stage the stage
      */
-    public NoteEntryWindow(Stage stage)
+    public RecordEntryWindow(Stage stage)
     {
         //create grid, scene, stage, buttons
         myStage = stage;
@@ -137,25 +137,7 @@ public class NoteEntryWindow
         //        }); // end transactionBtn setOnAction
         //
         //
-                //openAcctBtn action
-                newPatientBtn.setOnAction(new EventHandler<ActionEvent>() {
-                    Stage newStage = new Stage();
-                    @Override
-                    public void handle(ActionEvent e) 
-                    {
-                        if(newStage.isShowing())
-                        {
-                            newStage.toFront();
-                        }
-                        else
-                        {
-                            //open AccountCreationWindow
-                            NewPatientWindow newPtWindow = new NewPatientWindow(newStage);
-                            newPtWindow.show();
-                        }    
-                    }//end handle()
-                }); // end openAcctBtn setOnAction
-        
+               
                 
 
         //doneBtn closes note entry window
@@ -171,7 +153,7 @@ public class NoteEntryWindow
 
         }); // end doneBtn setOnAction
 
-    }//end NoteEntryWindow()
+    }//end RecordEntryWindow()
 
 
     /**
@@ -197,6 +179,6 @@ public class NoteEntryWindow
     }
 
 
-}//end class NoteEntryWindow
+}//end class RecordEntryWindow
 
 
