@@ -109,7 +109,7 @@ public class DailyNote implements Note
             bw.write("*** DAILY NOTE ***\n");
             bw.write(this.dailyNote + "\n\n");
             bw.write("*** END OF DAILY TREATMENT NOTE ***\n\n"); 
-            bw.write("********************\n\n");
+            bw.write("--------------------------------------\n\n");
         } 
         catch (IOException e)
         {

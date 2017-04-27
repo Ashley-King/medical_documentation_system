@@ -4,7 +4,9 @@ import java.awt.event.ActionListener;
 import java.util.EventListener;
 
 import edu.tridenttech.king.finalProject.model.Clinic;
+import edu.tridenttech.king.finalProject.model.DailyNote;
 import edu.tridenttech.king.finalProject.model.Patient;
+import edu.tridenttech.king.finalProject.model.ProgressNote;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
@@ -27,7 +30,7 @@ public class NoteWindow
 
     /** The my stage. */
     private Stage myStage;
-    
+
     private Patient myPatient;
 
 
@@ -50,18 +53,22 @@ public class NoteWindow
         myStage.setScene(scene);
         Button createBtn = new Button("Create Note");
         Button cancelBtn = new Button("Cancel");
-        
+
         Text title = new Text("Choose A Note Type:");
         Text procedureText = new Text("Enter The Procedure Code:");
         TextField procedure = new TextField();
         Text unitsText = new Text("Enter The Number Of Units:");
         TextField units = new TextField();
         Text goalText = new Text("Enter A New Therapy Goal:");
-        TextField goal = new TextField();
+        TextArea goal = new TextArea();
         Text recText = new Text("Enter Your Therapy Recommendations:");
-        TextField rec = new TextField();
+        TextArea rec = new TextArea();
         Text dailyText = new Text("Enter A Daily Treatment Note:");
-        TextField daily = new TextField();
+        TextArea daily = new TextArea();
+        //allow wrapping
+        goal.setWrapText(true);
+        rec.setWrapText(true);
+        daily.setWrapText(true);
 
         RadioButton progressBtn = new RadioButton("Progress Note");
         RadioButton dailyBtn = new RadioButton("Daily Note");
@@ -149,68 +156,63 @@ public class NoteWindow
         }); // end cancelBtn setOnAction
 
         //createBtn action
-        //        createBtn.setOnAction(new EventHandler<ActionEvent>()
-        //        {
-        //            @Override
-        //            public void handle(ActionEvent e)
-        //            {
-        //
-        //                if(!eiBtn.isSelected() && !saBtn.isSelected())
-        //                {
-        //                    Alert alert = new Alert(AlertType.ERROR);
-        //                    alert.setTitle("Patient Creation Error");
-        //                    alert.setContentText("Please Choose A Patient Type.");
-        //                    alert.showAndWait();
-        //                }
-        //                else if(ptName.getText().equals("") || bdate.getText().equals("")
-        //                        || idNum.getText().equals("")  || tName.getText().equals("")
-        //                        || meeting.getText().equals(""))
-        //                {
-        //                    Alert alert = new Alert(AlertType.ERROR);
-        //                    alert.setTitle("Patient Creation Error");
-        //                    alert.setContentText("Please Enter All "
-        //                            + "Required Patient Information");
-        //                    alert.showAndWait();
-        //                }
-        //                else
-        //                {
-        //                    if(eiBtn.isSelected())
-        //                    {
-        //                        Clinic clinic = Clinic.getInstance();
-        //                        int id = Integer.parseInt(idNum.getText());
-        //                        boolean success = clinic.createNewPatient(ptName.getText(), 
-        //                                bdate.getText(), id, Patient.PatientType.EarlyIntervention,
-        //                                tName.getText(), meeting.getText());
-        //                        if(!success)
-        //                        {
-        //                            Alert alert = new Alert(AlertType.ERROR);
-        //                            alert.setTitle("Patient Creation Error");
-        //                            alert.setContentText("Patient could not be created.");
-        //                            alert.showAndWait();
-        //                        }//end if not successful 
-        //                        myStage.close();
-        //                    }
-        //                    else 
-        //                    {
-        //
-        //                        Clinic clinic = Clinic.getInstance();
-        //                        int id = Integer.parseInt(idNum.getText());
-        //                        boolean success = clinic.createNewPatient(ptName.getText(), 
-        //                                bdate.getText(), id, Patient.PatientType.SchoolAge,
-        //                                tName.getText(), meeting.getText());
-        //                        if(!success)
-        //                        {
-        //                            Alert alert = new Alert(AlertType.ERROR);
-        //                            alert.setTitle("Patient Creation Error");
-        //                            alert.setContentText("Patient could not be created.");
-        //                            alert.showAndWait();
-        //                        }//end if not successful
-        //                        myStage.close();
-        //                    }//end create checking account
-        //                    RecordAccessWindow.updatePatients();
-        //                }//end create account
-        //            }//end handle()
-        //        });//end createBtn setOnAction()
+        createBtn.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent e)
+            {
+                if(units.getText().equals("") || procedure.getText().equals(""))          
+                {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Note Entry Error");
+                    alert.setContentText("Please Enter Number of Units "
+                            + "And The Procedure Code");
+                    alert.showAndWait();
+                }
+                else
+                {
+                    if(progressBtn.isSelected())
+                    {
+                        if(goal.getText().equals("") || rec.getText().equals(""))
+                        {
+                            Alert alert = new Alert(AlertType.ERROR);
+                            alert.setTitle("Note Entry Error");
+                            alert.setContentText("Please Enter A Goal And "
+                                    + "Your Current Therapy Recommendations.");
+                            alert.showAndWait();
+                        }
+                        int ptId = myPatient.getPatientId();
+                        int un = Integer.parseInt(units.getText());
+                        int pro = Integer.parseInt(procedure.getText());
+                        ProgressNote newPN = new ProgressNote(ptId, un,
+                                pro, goal.getText(), rec.getText());
+                        newPN.writeNoteToFile();
+                        myStage.close();
+                    }
+                    else 
+                    {
+
+                        if(daily.getText().equals("") )
+                        {
+                            Alert alert = new Alert(AlertType.ERROR);
+                            alert.setTitle("Note Entry Error");
+                            alert.setContentText("Please Enter A Daily "
+                                    + "Treatment Note.");
+                            alert.showAndWait();
+                        }
+                        int ptId = myPatient.getPatientId();
+                        int un = Integer.parseInt(units.getText());
+                        int pro = Integer.parseInt(procedure.getText());
+                        DailyNote newDN = new DailyNote(ptId, un,
+                                pro, daily.getText());
+                        newDN.writeNoteToFile();
+                        
+                        myStage.close();
+                    }
+                    RecordAccessWindow.updatePatients();
+                }//end create note
+            }//end handle()
+        });//end createBtn setOnAction()
 
     }//end NoteWindow()
 
