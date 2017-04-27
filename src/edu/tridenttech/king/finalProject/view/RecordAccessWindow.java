@@ -5,8 +5,8 @@
 package edu.tridenttech.king.finalProject.view;
 
 import java.util.List;
-
 import edu.tridenttech.king.finalProject.model.Clinic;
+import edu.tridenttech.king.finalProject.model.Patient;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -61,6 +61,7 @@ public class RecordAccessWindow
 
         //patients
         patients.setMinWidth(330);
+        patients.setVisibleRowCount(100);
 
         //Setting size for the pane  
         pane.setMaxSize(150, 150); 
@@ -95,46 +96,6 @@ public class RecordAccessWindow
 
         //actions
 
-        //        //transactionBtn action
-        //        transactionBtn.setOnAction(new EventHandler<ActionEvent>() {
-        //            Stage newStage = new Stage();
-        //
-        //            @Override
-        //            public void handle(ActionEvent e) 
-        //            {
-        //                Account acct;
-        //                Bank bank = Bank.getInstance();
-        //                bank = Bank.getInstance();
-        //                acct = bank.findAccountByNum(accounts.getValue());
-        //                if(acct == null)
-        //                {
-        //                    Alert alert = new Alert(AlertType.ERROR);
-        //                    alert.setTitle("Account Error");
-        //                    alert.setContentText("Please Choose An Account.");
-        //                    alert.showAndWait();
-        //                }else
-        //                {
-        //                    if(newStage.isShowing())
-        //                    {
-        //                        Alert alert = new Alert(AlertType.ERROR);
-        //                        alert.setTitle("Transaction Error");
-        //                        alert.setContentText("Please complete your original transaction"
-        //                                + " before attempting to "
-        //                                + " make a new transaction.");
-        //                        alert.showAndWait();
-        //                        newStage.toFront();
-        //                    }
-        //                    else
-        //                    {
-        //                        //open Transaction Window
-        //                        TransactionWindow transWindow = new TransactionWindow(newStage, acct);
-        //                        transWindow.show();
-        //                    }   
-        //                } //end else acct not null
-        //            }//end handle()
-        //        }); // end transactionBtn setOnAction
-        //
-        //
         //newPatientBtn action
         newPatientBtn.setOnAction(new EventHandler<ActionEvent>() {
             Stage newStage = new Stage();
@@ -153,22 +114,33 @@ public class RecordAccessWindow
                 }    
             }//end handle()
         }); // end newPatientBtn setOnAction   
+
         //noteBtn action
         noteBtn.setOnAction(new EventHandler<ActionEvent>() {
             Stage newStage = new Stage();
             @Override
             public void handle(ActionEvent e) 
             {
+                Patient thisPatient;
+                Clinic clinic = Clinic.getInstance();
+                thisPatient = clinic.findPatientById(patients.getValue());
                 if(newStage.isShowing())
                 {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Record Error");
+                    alert.setContentText("Please complete your original job"
+                            + " before attempting a "
+                            + " new job.");
+                    alert.showAndWait();
                     newStage.toFront();
                 }
                 else
                 {
                     //open NewPatientWindow
-                    NoteWindow newNoteWindow = new NoteWindow(newStage);
+                    NoteWindow newNoteWindow = new NoteWindow(newStage, thisPatient );
                     newNoteWindow.show();
-                }    
+                } 
+
             }//end handle()
         }); // end noteBtn setOnAction  
 
@@ -197,6 +169,7 @@ public class RecordAccessWindow
     public void show(List<Integer> patientList)
     {
         patients.getItems().setAll(patientList);
+        patients.getSelectionModel().selectFirst();
         myStage.show();
     }
 

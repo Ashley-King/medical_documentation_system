@@ -27,6 +27,8 @@ public class NoteWindow
 
     /** The my stage. */
     private Stage myStage;
+    
+    private Patient myPatient;
 
 
     /**
@@ -34,16 +36,21 @@ public class NoteWindow
      *
      * @param stage the stage
      */
-    public NoteWindow(Stage stage)
+    public NoteWindow(Stage stage, Patient patient)
     {
+        //pass in patient
+        this.myPatient = patient;
         //create grid, scene, stage, buttons
         myStage = stage;
-        myStage.setTitle("Enter A Note");
+        String patientName = this.myPatient.getName();
+        int patientId =  this.myPatient.getPatientId();
+        myStage.setTitle(patientName + " - " + patientId);
         GridPane pane = new GridPane();
         Scene scene = new Scene(pane);
         myStage.setScene(scene);
         Button createBtn = new Button("Create Note");
         Button cancelBtn = new Button("Cancel");
+        
         Text title = new Text("Choose A Note Type:");
         Text procedureText = new Text("Enter The Procedure Code:");
         TextField procedure = new TextField();
@@ -59,7 +66,7 @@ public class NoteWindow
         RadioButton progressBtn = new RadioButton("Progress Note");
         RadioButton dailyBtn = new RadioButton("Daily Note");
         //daily is initially selected
-        
+
 
         //set button width
         createBtn.setPrefWidth(175);
@@ -74,25 +81,8 @@ public class NoteWindow
         goal.setDisable(true);
         rec.setDisable(true);
         daily.setDisable(false); 
-        
-        dailyBtn.setOnAction(new EventHandler<ActionEvent>() {
 
-            @Override
-            public void handle(ActionEvent arg0) {
-                goal.setDisable(true);
-                rec.setDisable(true);
-                daily.setDisable(false);   
-            }//end handle()
-        });//end dailyBtn.setOnAction
-        progressBtn.setOnAction(new EventHandler<ActionEvent>() {
 
-            @Override
-            public void handle(ActionEvent arg0) {
-                goal.setDisable(false);
-                rec.setDisable(false);
-                daily.setDisable(true);   
-            }//end handle()
-        });//end progressBtn.setOnAction
 
         //Setting size for the pane  
         pane.setMinSize(500, 200); 
@@ -105,7 +95,7 @@ public class NoteWindow
         pane.setHgap(5);       
 
         //Setting the Grid alignment 
-        
+
         pane.setAlignment(Pos.CENTER); 
         pane.add(title, 0,0, 4, 1);
         pane.add(progressBtn, 0, 1);
@@ -124,10 +114,29 @@ public class NoteWindow
         pane.add(cancelBtn, 1, 13);
 
         //actions
-        
-       
-        
-        
+
+        //actions for when radio buttons
+        dailyBtn.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent arg0) {
+                goal.setDisable(true);
+                rec.setDisable(true);
+                daily.setDisable(false);   
+            }//end handle()
+        });//end dailyBtn.setOnAction
+
+        progressBtn.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent arg0) {
+                goal.setDisable(false);
+                rec.setDisable(false);
+                daily.setDisable(true);   
+            }//end handle()
+        });//end progressBtn.setOnAction
+
+
         //cancelBtn action
         cancelBtn.setOnAction(new EventHandler<ActionEvent>() 
         {
@@ -140,68 +149,68 @@ public class NoteWindow
         }); // end cancelBtn setOnAction
 
         //createBtn action
-//        createBtn.setOnAction(new EventHandler<ActionEvent>()
-//        {
-//            @Override
-//            public void handle(ActionEvent e)
-//            {
-//
-//                if(!eiBtn.isSelected() && !saBtn.isSelected())
-//                {
-//                    Alert alert = new Alert(AlertType.ERROR);
-//                    alert.setTitle("Patient Creation Error");
-//                    alert.setContentText("Please Choose A Patient Type.");
-//                    alert.showAndWait();
-//                }
-//                else if(ptName.getText().equals("") || bdate.getText().equals("")
-//                        || idNum.getText().equals("")  || tName.getText().equals("")
-//                        || meeting.getText().equals(""))
-//                {
-//                    Alert alert = new Alert(AlertType.ERROR);
-//                    alert.setTitle("Patient Creation Error");
-//                    alert.setContentText("Please Enter All "
-//                            + "Required Patient Information");
-//                    alert.showAndWait();
-//                }
-//                else
-//                {
-//                    if(eiBtn.isSelected())
-//                    {
-//                        Clinic clinic = Clinic.getInstance();
-//                        int id = Integer.parseInt(idNum.getText());
-//                        boolean success = clinic.createNewPatient(ptName.getText(), 
-//                                bdate.getText(), id, Patient.PatientType.EarlyIntervention,
-//                                tName.getText(), meeting.getText());
-//                        if(!success)
-//                        {
-//                            Alert alert = new Alert(AlertType.ERROR);
-//                            alert.setTitle("Patient Creation Error");
-//                            alert.setContentText("Patient could not be created.");
-//                            alert.showAndWait();
-//                        }//end if not successful 
-//                        myStage.close();
-//                    }
-//                    else 
-//                    {
-//
-//                        Clinic clinic = Clinic.getInstance();
-//                        int id = Integer.parseInt(idNum.getText());
-//                        boolean success = clinic.createNewPatient(ptName.getText(), 
-//                                bdate.getText(), id, Patient.PatientType.SchoolAge,
-//                                tName.getText(), meeting.getText());
-//                        if(!success)
-//                        {
-//                            Alert alert = new Alert(AlertType.ERROR);
-//                            alert.setTitle("Patient Creation Error");
-//                            alert.setContentText("Patient could not be created.");
-//                            alert.showAndWait();
-//                        }//end if not successful
-//                        myStage.close();
-//                    }//end create checking account
-//                    RecordAccessWindow.updatePatients();
-//                }//end create account
-//            }//end handle()
-//        });//end createBtn setOnAction()
+        //        createBtn.setOnAction(new EventHandler<ActionEvent>()
+        //        {
+        //            @Override
+        //            public void handle(ActionEvent e)
+        //            {
+        //
+        //                if(!eiBtn.isSelected() && !saBtn.isSelected())
+        //                {
+        //                    Alert alert = new Alert(AlertType.ERROR);
+        //                    alert.setTitle("Patient Creation Error");
+        //                    alert.setContentText("Please Choose A Patient Type.");
+        //                    alert.showAndWait();
+        //                }
+        //                else if(ptName.getText().equals("") || bdate.getText().equals("")
+        //                        || idNum.getText().equals("")  || tName.getText().equals("")
+        //                        || meeting.getText().equals(""))
+        //                {
+        //                    Alert alert = new Alert(AlertType.ERROR);
+        //                    alert.setTitle("Patient Creation Error");
+        //                    alert.setContentText("Please Enter All "
+        //                            + "Required Patient Information");
+        //                    alert.showAndWait();
+        //                }
+        //                else
+        //                {
+        //                    if(eiBtn.isSelected())
+        //                    {
+        //                        Clinic clinic = Clinic.getInstance();
+        //                        int id = Integer.parseInt(idNum.getText());
+        //                        boolean success = clinic.createNewPatient(ptName.getText(), 
+        //                                bdate.getText(), id, Patient.PatientType.EarlyIntervention,
+        //                                tName.getText(), meeting.getText());
+        //                        if(!success)
+        //                        {
+        //                            Alert alert = new Alert(AlertType.ERROR);
+        //                            alert.setTitle("Patient Creation Error");
+        //                            alert.setContentText("Patient could not be created.");
+        //                            alert.showAndWait();
+        //                        }//end if not successful 
+        //                        myStage.close();
+        //                    }
+        //                    else 
+        //                    {
+        //
+        //                        Clinic clinic = Clinic.getInstance();
+        //                        int id = Integer.parseInt(idNum.getText());
+        //                        boolean success = clinic.createNewPatient(ptName.getText(), 
+        //                                bdate.getText(), id, Patient.PatientType.SchoolAge,
+        //                                tName.getText(), meeting.getText());
+        //                        if(!success)
+        //                        {
+        //                            Alert alert = new Alert(AlertType.ERROR);
+        //                            alert.setTitle("Patient Creation Error");
+        //                            alert.setContentText("Patient could not be created.");
+        //                            alert.showAndWait();
+        //                        }//end if not successful
+        //                        myStage.close();
+        //                    }//end create checking account
+        //                    RecordAccessWindow.updatePatients();
+        //                }//end create account
+        //            }//end handle()
+        //        });//end createBtn setOnAction()
 
     }//end NoteWindow()
 
