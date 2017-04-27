@@ -147,13 +147,31 @@ public class RecordAccessWindow
                 }
                 else
                 {
-                    //open AccountCreationWindow
+                    //open NewPatientWindow
                     NewPatientWindow newPtWindow = new NewPatientWindow(newStage);
                     newPtWindow.show();
                 }    
             }//end handle()
-        }); // end newPatientBtn setOnAction    
-                
+        }); // end newPatientBtn setOnAction   
+        //noteBtn action
+        noteBtn.setOnAction(new EventHandler<ActionEvent>() {
+            Stage newStage = new Stage();
+            @Override
+            public void handle(ActionEvent e) 
+            {
+                if(newStage.isShowing())
+                {
+                    newStage.toFront();
+                }
+                else
+                {
+                    //open NewPatientWindow
+                    NoteWindow newNoteWindow = new NoteWindow(newStage);
+                    newNoteWindow.show();
+                }    
+            }//end handle()
+        }); // end noteBtn setOnAction  
+
 
         //doneBtn closes note entry window
         doneBtn.setOnAction(new EventHandler<ActionEvent>() {
