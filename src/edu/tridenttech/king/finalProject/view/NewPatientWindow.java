@@ -173,7 +173,7 @@ public class NewPatientWindow
                         }//end if not successful
                         myStage.close();
                     }//end create checking account
-                    RecordEntryWindow.updatePatients();
+                    RecordAccessWindow.updatePatients();
                 }//end create account
             }//end handle()
         });//end createBtn setOnAction()

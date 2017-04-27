@@ -1,5 +1,5 @@
 /*
- * Note Entry Window provides access to patient records and notes.
+ * RecordAccessWindow provides access to patient records and notes.
  * @author: Ashley King
  */
 package edu.tridenttech.king.finalProject.view;
@@ -22,9 +22,9 @@ import javafx.stage.Stage;
 
 
 /**
- * The Class RecordEntryWindow.
+ * The Class RecordAccessWindow.
  */
-public class RecordEntryWindow 
+public class RecordAccessWindow 
 {
 
     /** The my stage. */
@@ -38,7 +38,7 @@ public class RecordEntryWindow
      *
      * @param stage the stage
      */
-    public RecordEntryWindow(Stage stage)
+    public RecordAccessWindow(Stage stage)
     {
         //create grid, scene, stage, buttons
         myStage = stage;
@@ -153,7 +153,7 @@ public class RecordEntryWindow
 
         }); // end doneBtn setOnAction
 
-    }//end RecordEntryWindow()
+    }//end RecordAccessWindow()
 
 
     /**
@@ -179,6 +179,6 @@ public class RecordEntryWindow
     }
 
 
-}//end class RecordEntryWindow
+}//end class RecordAccessWindow
 
 
