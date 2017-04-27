@@ -189,6 +189,7 @@ public class Clinic
     {
         ArrayList<Integer> patientIdNumbers = new ArrayList<>();
         patients.stream().forEach(e -> patientIdNumbers.add(e.getPatientId()));
+        //sort id numbers in ascending order
         Collections.sort(patientIdNumbers);
         return patientIdNumbers;
     }//end getAllPatientIdNumbers()

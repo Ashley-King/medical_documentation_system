@@ -54,7 +54,7 @@ public class NoteEntryWindow
         myStage.setScene(scene);
 
         //set button width
-        newPatientBtn.setPrefWidth(150);
+        newPatientBtn.setPrefWidth(330);
         viewRecordBtn.setPrefWidth(330);
         progressBtn.setPrefWidth(150);
         dailyBtn.setPrefWidth(150);
@@ -90,6 +90,7 @@ public class NoteEntryWindow
         pane.add(title, 0,0, 4, 1);
         pane.add(patients, 0, 1, 4, 1);
         pane.add(viewRecordBtn, 0,2, 4, 1);
+        pane.add(newPatientBtn,0, 3, 4, 1);
         pane.add(progressBtn, 0, 4, 2, 1);
         pane.add(dailyBtn, 2, 4,2, 1);
         pane.add(doneBtn, 0, 7);
@@ -136,44 +137,26 @@ public class NoteEntryWindow
         //        }); // end transactionBtn setOnAction
         //
         //
-        //        //openAcctBtn action
-        //        openAcctBtn.setOnAction(new EventHandler<ActionEvent>() {
-        //            Stage newStage = new Stage();
-        //            @Override
-        //            public void handle(ActionEvent e) 
-        //            {
-        //                if(newStage.isShowing())
-        //                {
-        //                    newStage.toFront();
-        //                }
-        //                else
-        //                {
-        //                    //open AccountCreationWindow
-        //                    AccountCreationWindow newAcctWindow = new AccountCreationWindow(newStage);
-        //                    newAcctWindow.show();
-        //                }    
-        //            }//end handle()
-        //        }); // end openAcctBtn setOnAction
-        //
-        //        //transferBtn action
-        //        transferBtn.setOnAction(new EventHandler<ActionEvent>() {
-        //            Stage newStage = new Stage();
-        //            @Override
-        //            public void handle(ActionEvent e) 
-        //            {
-        //                if(newStage.isShowing())
-        //                {
-        //                    newStage.toFront();
-        //                }
-        //                else
-        //                {
-        //                    //open Transfer Window
-        //                    TransferWindow newAcctWindow = new TransferWindow(newStage);
-        //                    newAcctWindow.show();   
-        //                }    
-        //
-        //            }//end handle()
-        //        }); // end openAcctBtn setOnAction
+                //openAcctBtn action
+                newPatientBtn.setOnAction(new EventHandler<ActionEvent>() {
+                    Stage newStage = new Stage();
+                    @Override
+                    public void handle(ActionEvent e) 
+                    {
+                        if(newStage.isShowing())
+                        {
+                            newStage.toFront();
+                        }
+                        else
+                        {
+                            //open AccountCreationWindow
+                            NewPatientWindow newPtWindow = new NewPatientWindow(newStage);
+                            newPtWindow.show();
+                        }    
+                    }//end handle()
+                }); // end openAcctBtn setOnAction
+        
+                
 
         //doneBtn closes note entry window
         doneBtn.setOnAction(new EventHandler<ActionEvent>() {
