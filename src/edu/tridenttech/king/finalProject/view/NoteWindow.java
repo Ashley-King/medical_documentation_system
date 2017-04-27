@@ -59,7 +59,7 @@ public class NoteWindow
         RadioButton progressBtn = new RadioButton("Progress Note");
         RadioButton dailyBtn = new RadioButton("Daily Note");
         //daily is initially selected
-        dailyBtn.setSelected(true);
+        
 
         //set button width
         createBtn.setPrefWidth(175);
@@ -69,23 +69,28 @@ public class NoteWindow
         ToggleGroup group = new ToggleGroup();
         progressBtn.setToggleGroup(group);
         dailyBtn.setToggleGroup(group);
+        //set up initial radio button state
+        dailyBtn.setSelected(true);
+        goal.setDisable(true);
+        rec.setDisable(true);
+        daily.setDisable(false); 
         
         dailyBtn.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent arg0) {
-                goal.setDisable(false);
-                rec.setDisable(false);
-                daily.setDisable(true);   
-            }//end handle()
-        });//end dailyBtn.setOnAction
-        progressBtn.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent arg0) {
                 goal.setDisable(true);
                 rec.setDisable(true);
                 daily.setDisable(false);   
+            }//end handle()
+        });//end dailyBtn.setOnAction
+        progressBtn.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent arg0) {
+                goal.setDisable(false);
+                rec.setDisable(false);
+                daily.setDisable(true);   
             }//end handle()
         });//end progressBtn.setOnAction
 
