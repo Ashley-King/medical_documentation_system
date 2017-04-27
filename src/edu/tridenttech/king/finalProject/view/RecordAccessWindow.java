@@ -5,6 +5,7 @@
 package edu.tridenttech.king.finalProject.view;
 
 import java.util.List;
+
 import edu.tridenttech.king.finalProject.model.Clinic;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -46,8 +47,7 @@ public class RecordAccessWindow
         Scene scene = new Scene(pane);
         Button newPatientBtn = new Button("Add New Patient");
         Button viewRecordBtn = new Button("View Patient Record");
-        Button progressBtn = new Button("Progress Note");
-        Button dailyBtn = new Button("Daily Note");
+        Button noteBtn = new Button("Enter Note");
         Button doneBtn = new Button("Quit");
         Text title = new Text("Choose A Patient By ID Number:");
         myStage.setTitle("PATIENT RECORD MENU");
@@ -56,8 +56,7 @@ public class RecordAccessWindow
         //set button width
         newPatientBtn.setPrefWidth(330);
         viewRecordBtn.setPrefWidth(330);
-        progressBtn.setPrefWidth(150);
-        dailyBtn.setPrefWidth(150);
+        noteBtn.setPrefWidth(330);
         doneBtn.setPrefWidth(100);
 
         //patients
@@ -91,8 +90,7 @@ public class RecordAccessWindow
         pane.add(patients, 0, 1, 4, 1);
         pane.add(viewRecordBtn, 0,2, 4, 1);
         pane.add(newPatientBtn,0, 3, 4, 1);
-        pane.add(progressBtn, 0, 4, 2, 1);
-        pane.add(dailyBtn, 2, 4,2, 1);
+        pane.add(noteBtn, 0, 4, 4, 1);
         pane.add(doneBtn, 0, 7);
 
         //actions
@@ -137,7 +135,24 @@ public class RecordAccessWindow
         //        }); // end transactionBtn setOnAction
         //
         //
-               
+        //newPatientBtn action
+        newPatientBtn.setOnAction(new EventHandler<ActionEvent>() {
+            Stage newStage = new Stage();
+            @Override
+            public void handle(ActionEvent e) 
+            {
+                if(newStage.isShowing())
+                {
+                    newStage.toFront();
+                }
+                else
+                {
+                    //open AccountCreationWindow
+                    NewPatientWindow newPtWindow = new NewPatientWindow(newStage);
+                    newPtWindow.show();
+                }    
+            }//end handle()
+        }); // end newPatientBtn setOnAction    
                 
 
         //doneBtn closes note entry window

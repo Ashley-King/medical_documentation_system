@@ -156,7 +156,7 @@ public class NewPatientWindow
                         }//end if not successful 
                         myStage.close();
                     }
-                    else //create checking account
+                    else 
                     {
 
                         Clinic clinic = Clinic.getInstance();
@@ -191,5 +191,5 @@ public class NewPatientWindow
         myStage.show();
     }
 
-}//end class AccountCreationWindow
+}//end class NewPatientWindow
 
