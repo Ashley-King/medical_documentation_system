@@ -1,3 +1,7 @@
+/*
+ * Note Window enables creation of a Progress Note or a Daily Note
+ * @author: Ashley King
+ */
 package edu.tridenttech.king.finalProject.view;
 
 import edu.tridenttech.king.finalProject.model.DailyNote;
@@ -19,19 +23,24 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * The Class NoteWindow.
+ */
 public class NoteWindow
 {
 
     /** The my stage. */
     private Stage myStage;
 
+    /** The my patient. */
     private Patient myPatient;
 
 
     /**
-     * Instantiates a new patient creation window.
+     * Instantiates a new note window.
      *
      * @param stage the stage
+     * @param patient the patient
      */
     public NoteWindow(Stage stage, Patient patient)
     {
@@ -66,8 +75,6 @@ public class NoteWindow
 
         RadioButton progressBtn = new RadioButton("Progress Note");
         RadioButton dailyBtn = new RadioButton("Daily Note");
-        //daily is initially selected
-
 
         //set button width
         createBtn.setPrefWidth(175);
@@ -82,8 +89,6 @@ public class NoteWindow
         goal.setDisable(true);
         rec.setDisable(true);
         daily.setDisable(false); 
-
-
 
         //Setting size for the pane  
         pane.setMinSize(500, 200); 
@@ -116,7 +121,7 @@ public class NoteWindow
 
         //actions
 
-        //actions for when radio buttons
+        //actions for radio buttons
         dailyBtn.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -200,7 +205,7 @@ public class NoteWindow
                         DailyNote newDN = new DailyNote(ptId, un,
                                 pro, daily.getText());
                         newDN.writeNoteToFile();
-                        
+
                         myStage.close();
                     }
                     RecordAccessWindow.updatePatients();
@@ -214,7 +219,7 @@ public class NoteWindow
     /**
      * Show
      * 
-     * Shows Patient Creation Window.
+     * Shows Note Window.
      */
     public void show()
     {

@@ -25,7 +25,7 @@ import javafx.stage.Stage;
 /**
  * The Class RecordAccessWindow.
  */
-public class RecordAccessWindow 
+public class RecordAccessWindow
 {
 
     /** The my stage. */
@@ -140,11 +140,10 @@ public class RecordAccessWindow
                     NoteWindow newNoteWindow = new NoteWindow(newStage, thisPatient );
                     newNoteWindow.show();
                 } 
-
             }//end handle()
         }); // end noteBtn setOnAction 
         
-      //viewRecordBtn action
+        //viewRecordBtn action
         viewRecordBtn.setOnAction(new EventHandler<ActionEvent>() {
             Stage newStage = new Stage();
             @Override
@@ -192,7 +191,7 @@ public class RecordAccessWindow
 
     /**
      * Show.
-     *Shows the note entry window.
+     *Shows the record access window.
      * @param patientList the list of patient account numbers
      */
     public void show(List<Integer> patientList)
@@ -200,7 +199,7 @@ public class RecordAccessWindow
         patients.getItems().setAll(patientList);
         patients.getSelectionModel().selectFirst();
         myStage.show();
-    }
+    }//end show()
 
     /**
      * Update patients.
@@ -211,8 +210,7 @@ public class RecordAccessWindow
     {
         Clinic clinic = Clinic.getInstance(); 
         patients.getItems().setAll(clinic.getAllPatientIdNumbers());
-    }
-
+    }//end updatePatients()
 
 }//end class RecordAccessWindow
 

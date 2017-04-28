@@ -1,3 +1,7 @@
+/*
+ * Record View Window displays the patient's therapy record.
+ * @author: Ashley King
+ */
 package edu.tridenttech.king.finalProject.view;
 
 
@@ -17,11 +21,15 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class RecordViewWindow
+/**
+ * The Class RecordViewWindow.
+ */
+public class RecordViewWindow 
 {
     /** The my stage. */
     private Stage myStage;
 
+    /** The my patient. */
     private Patient myPatient;
 
 
@@ -29,6 +37,7 @@ public class RecordViewWindow
      * Instantiates a new Record View window.
      *
      * @param stage the stage
+     * @param patient the patient
      */
     public RecordViewWindow(Stage stage, Patient patient)
     {
@@ -42,21 +51,21 @@ public class RecordViewWindow
         GridPane pane = new GridPane();
         Scene scene = new Scene(pane);
         myStage.setScene(scene);
-        
+
         Button cancelBtn = new Button("Quit");
 
         Text title = new Text("PATIENT THERAPY RECORD");
-        
+
         TextArea note = new TextArea();
-        
-        //allow wrapping
+        note.setEditable(false);
         note.setWrapText(true);
-        
+        note.setPrefHeight(500);
+
         //set button width
         cancelBtn.setPrefWidth(150);
 
         //Setting size for the pane  
-        pane.setMinSize(500, 200); 
+        pane.setMinSize(500, 600); 
 
         //Setting the padding  
         pane.setPadding(new Insets(10, 10, 10, 10)); 
@@ -73,7 +82,7 @@ public class RecordViewWindow
         pane.add(cancelBtn, 0, 10);
 
         //actions
-        
+
         //read file and put in textArea
         String filePath = Clinic.FILEPATH;
         int ptId = this.myPatient.getPatientId();
@@ -93,11 +102,11 @@ public class RecordViewWindow
         } 
         catch (FileNotFoundException ex)
         {
-            
+
             ex.printStackTrace();
         }
-        
-        
+
+
         //cancelBtn action
         cancelBtn.setOnAction(new EventHandler<ActionEvent>() 
         {
@@ -120,8 +129,8 @@ public class RecordViewWindow
      */
     public void show()
     {
-        
+
         myStage.show();
-    }
+    }//end show()
 
 }//end class RecordViewWindow

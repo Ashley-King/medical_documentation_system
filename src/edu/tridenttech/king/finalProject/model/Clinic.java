@@ -131,7 +131,6 @@ public class Clinic
             return patients.add(newPatient);          
         }
 
-
     }//end createNewPatient
     
     /**

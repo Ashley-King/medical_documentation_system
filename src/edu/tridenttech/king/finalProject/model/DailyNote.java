@@ -56,7 +56,7 @@ public class DailyNote implements Note
         this.dailyNote = daily;
         this.date = getDateTime();
         this.patient = getPatient();
-    }//end ProgressNote()
+    }//end DailyNote()
     
     /* (non-Javadoc)
      * @see edu.tridenttech.king.finalProject.model.Note#getPatient()

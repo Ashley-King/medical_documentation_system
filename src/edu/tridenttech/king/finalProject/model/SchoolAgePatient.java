@@ -20,8 +20,8 @@ public class SchoolAgePatient extends Patient
      * Instantiates a new school age patient.
      *
      * @param name the name
-     * @param dob the dob
-     * @param id the id
+     * @param dob the date of birth
+     * @param id the patient id
      * @param teacherName the teacher name
      * @param date the date
      */
@@ -32,7 +32,7 @@ public class SchoolAgePatient extends Patient
         this.teacherName = teacherName;
         this.IEPDate = date;
 
-    }//end EIPatient()
+    }//end SchoolAgePatient()
 
     /**
      * Gets the teacher name.

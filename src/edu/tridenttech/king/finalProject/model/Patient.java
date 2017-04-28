@@ -25,7 +25,7 @@ public class Patient
         /** The name. */
         private String name;
 
-        /** The dob. */
+        /** The date of birth. */
         private String dob;
 
         /** The patient type. */

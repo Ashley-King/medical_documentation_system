@@ -97,6 +97,7 @@ public class ProgressNote implements Note
         File file = new File(Clinic.FILEPATH + ptName + "_" + ptId + ".txt");
         try
         {
+            //appends note to patient's file
             fw = new FileWriter(file.getAbsoluteFile(), true);
         } 
         catch (IOException ex)
