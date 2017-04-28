@@ -1,6 +1,8 @@
 package edu.tridenttech.king.finalProject.view;
 
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import edu.tridenttech.king.finalProject.model.Clinic;
 import edu.tridenttech.king.finalProject.model.Patient;
@@ -76,15 +78,26 @@ public class RecordViewWindow
         String filePath = Clinic.FILEPATH;
         int ptId = this.myPatient.getPatientId();
         String ptName = this.myPatient.getName();
-        String thisFile = filePath + ptName + " - " + ptId; 
-        
-        Scanner fileInput = new Scanner(thisFile);
-        while(fileInput.hasNextLine())
+        String thisFile = filePath + ptName + "_" + ptId + ".txt"; 
+        File newFile = new File(thisFile);
+        Scanner fileInput;
+        try
         {
-            String nextLine = fileInput.nextLine();
-            note.appendText(nextLine);
+            fileInput = new Scanner(newFile);
+            while(fileInput.hasNextLine())
+            {
+                String nextLine = fileInput.nextLine();
+                note.appendText(nextLine + "\n");
+            }
+            fileInput.close();
+        } 
+        catch (FileNotFoundException ex)
+        {
+            
+            ex.printStackTrace();
         }
-        fileInput.close();
+        
+        
         //cancelBtn action
         cancelBtn.setOnAction(new EventHandler<ActionEvent>() 
         {

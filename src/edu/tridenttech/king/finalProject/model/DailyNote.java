@@ -89,7 +89,7 @@ public class DailyNote implements Note
         FileWriter fw = null;
         int ptId = this.id;
         String ptName = this.patient.getName();
-        File file = new File(Clinic.FILEPATH + ptName + " - " + ptId);
+        File file = new File(Clinic.FILEPATH + ptName + "_" + ptId + ".txt");
         try
         {
             fw = new FileWriter(file.getAbsoluteFile(), true);

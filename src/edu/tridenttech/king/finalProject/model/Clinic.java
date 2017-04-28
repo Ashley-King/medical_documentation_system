@@ -144,7 +144,7 @@ public class Clinic
     {
         int fileId = newPatient.getPatientId();
         String fileName = newPatient.getName();
-        File newFile = new File(FILEPATH + fileName + " - " + fileId);
+        File newFile = new File(FILEPATH + fileName + "_" + fileId + ".txt");
         if(!newFile.exists())
         {
             newFile.createNewFile();
