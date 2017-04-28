@@ -142,7 +142,36 @@ public class RecordAccessWindow
                 } 
 
             }//end handle()
-        }); // end noteBtn setOnAction  
+        }); // end noteBtn setOnAction 
+        
+      //viewRecordBtn action
+        viewRecordBtn.setOnAction(new EventHandler<ActionEvent>() {
+            Stage newStage = new Stage();
+            @Override
+            public void handle(ActionEvent e) 
+            {
+                Patient thisPatient;
+                Clinic clinic = Clinic.getInstance();
+                thisPatient = clinic.findPatientById(patients.getValue());
+                if(newStage.isShowing())
+                {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Record Error");
+                    alert.setContentText("Please complete your original job"
+                            + " before attempting a "
+                            + " new job.");
+                    alert.showAndWait();
+                    newStage.toFront();
+                }
+                else
+                {
+                    //open RecordViewWindow
+                    RecordViewWindow newRecord = new RecordViewWindow(newStage, thisPatient );
+                    newRecord.show();
+                } 
+
+            }//end handle()
+        }); // end noteBtn setOnAction 
 
 
         //doneBtn closes note entry window
