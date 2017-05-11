@@ -29,7 +29,7 @@ public class Clinic
     
     /** MUST CHANGE THIS FOR FULL FUNCTIONALITY OF PROGRAM **/
     /** The Constant FILEPATH. */
-    public static final String FILEPATH = "/Users/ashleyking/Documents/eclipse_workspace/Final_Project_King/Files/";
+    public static final String FILEPATH = "Add File Path For Writing To Computer";
 
     /**
      * Gets the single instance of Clinic.
